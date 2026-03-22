@@ -66,11 +66,45 @@ The extension is plain HTML/CSS/JS — no build step required.
 
 ```
 pat-token-creator/
-├── manifest.json   Chrome extension manifest (v3)
-├── popup.html      Extension popup UI
-├── popup.css       Popup styles
-├── popup.js        Popup logic & messaging
-└── content.js      Page automation content script
+├── manifest.json          Chrome extension manifest (v3)
+├── popup.html             Extension popup UI
+├── popup.css              Popup styles
+├── popup.js               Popup logic & messaging
+├── content.js             Page automation content script
+├── package.json           npm scripts for bundling & releasing
+├── scripts/
+│   ├── bundle.js          Creates a distributable .zip in dist/
+│   └── sync-manifest.js   Keeps manifest.json version in sync with package.json
+└── .github/workflows/
+    └── release.yml        GitHub Actions: bundles & publishes a release on tag push
 ```
 
 To reload after editing: go to `chrome://extensions` and click the **⟳ reload** button on the extension card.
+
+---
+
+## Bundling & Releasing
+
+### Bundle locally
+
+```bash
+npm run bundle
+# → dist/ado-pat-token-creator-v1.0.0.zip
+```
+
+### Publish a new release
+
+```bash
+npm run release          # bumps patch version (1.0.0 → 1.0.1)
+# or
+npm version minor        # 1.0.0 → 1.1.0
+npm version major        # 1.0.0 → 2.0.0
+git push origin main --tags
+```
+
+`npm run release` does three things automatically:
+1. Bumps the version in `package.json` and `manifest.json`.
+2. Creates a git commit and a `vX.Y.Z` tag.
+3. Pushes the commit and tag to `origin main`.
+
+The **GitHub Actions** workflow (`.github/workflows/release.yml`) then picks up the tag, bundles the extension, and creates a GitHub Release with the `.zip` attached.

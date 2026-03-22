@@ -159,7 +159,7 @@ npmrcWinBtn.addEventListener('click', () => copyNpmrcCommand('win', npmrcWinBtn)
 
 function showToken(value, expiresAt) {
   tokenValueEl.value  = value;
-  _currentBase64 = btoa(':' + value);
+  _currentBase64 = btoa(value);
   tokenBase64El.value = _currentBase64;
   const expiry = new Date(expiresAt);
   tokenExpiryEl.textContent = `Valid until ${expiry.toLocaleDateString()}`;

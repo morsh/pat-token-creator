@@ -1,0 +1,11 @@
+{
+  "name": "ado-pat-token-creator",
+  "version": "1.0.0",
+  "description": "Chrome extension to automate ADO PAT token creation",
+  "private": true,
+  "scripts": {
+    "bundle": "node scripts/bundle.js",
+    "version": "node scripts/sync-manifest.js && git add manifest.json",
+    "release": "npm version patch && git push origin main --tags"
+  }
+}
