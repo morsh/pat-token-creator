@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADO PAT Token Creator</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>PAT Token Creator</h1>
+        <p class="subtitle">Azure DevOps · powerbi.visualstudio.com</p>
+      </header>
+
+      <!-- Auth notice — shown when user is not signed in -->
+      <div id="authNotice" class="auth-notice hidden" role="alert">
+        <span class="auth-icon">&#128274;</span>
+        <div>
+          <strong>Sign in required</strong>
+          <p>You are not signed in to Azure DevOps. Please sign in, then come back and try again.</p>
+        </div>
+      </div>
+
+      <!-- Navigate notice — shown when not on the tokens page -->
+      <div id="navigateNotice" class="navigate-notice hidden">
+        <p>You need to be on the Azure DevOps tokens page to use this extension.</p>
+        <button id="openPageBtn" class="btn-secondary">
+          &#127760;&nbsp; Open Tokens Page
+        </button>
+      </div>
+
+      <main id="mainForm">
+        <div class="form-group">
+          <label for="tokenName">Token name</label>
+          <input
+            type="text"
+            id="tokenName"
+            placeholder="e.g. My Dev Token"
+            maxlength="256"
+            autocomplete="off"
+          />
+          <span id="nameError" class="field-error hidden">Please enter a token name.</span>
+        </div>
+
+        <!-- Collapsible permissions section -->
+        <section class="permissions-section">
+          <button id="permissionsToggle" class="permissions-toggle" aria-expanded="false" aria-controls="permissionsContent">
+            <span id="permissionsLabel">Permissions (16 selected)</span>
+            <span class="toggle-chevron" aria-hidden="true">&#9656;</span>
+          </button>
+          <div id="permissionsContent" class="permissions-content" hidden>
+            <ul id="scopeList" class="scope-list"></ul>
+          </div>
+        </section>
+
+        <button id="createBtn" class="btn-primary">
+          &#128273;&nbsp; Create Token
+        </button>
+
+        <div id="statusArea" class="status-area hidden" aria-live="polite">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <p id="statusMessage"></p>
+        </div>
+      </main>
+
+      <!-- Token section lives OUTSIDE mainForm so it's always visible when a stored token exists -->
+      <section id="tokenSection" class="token-section hidden" aria-label="Generated token">
+        <div class="token-section-header">
+          <h2>Your Token</h2>
+          <span id="tokenExpiry" class="token-expiry"></span>
+        </div>
+        <div class="token-field">
+          <label for="tokenValue">Access Token</label>
+          <div class="token-row">
+            <input type="text" id="tokenValue" readonly spellcheck="false" aria-label="Access token value" />
+            <button class="btn-copy" id="copyToken" title="Copy token" aria-label="Copy access token">&#128203;</button>
+          </div>
+        </div>
+        <div class="token-field">
+          <label for="tokenBase64">Base64 (HTTP Basic Auth)</label>
+          <div class="token-row">
+            <input type="text" id="tokenBase64" readonly spellcheck="false" aria-label="Base64 encoded token" />
+            <button class="btn-copy" id="copyBase64" title="Copy base64" aria-label="Copy base64 token">&#128203;</button>
+          </div>
+        </div>
+
+        <!-- npmrc update commands -->
+        <div class="npmrc-actions">
+          <button id="npmrcMacBtn" class="btn-npmrc" disabled aria-label="Copy npmrc update command for Mac and Linux">
+            &#127822; Update .npmrc (Mac / Linux)
+          </button>
+          <button id="npmrcWinBtn" class="btn-npmrc" disabled aria-label="Copy npmrc update command for Windows">
+            &#128759; Update .npmrc (Windows)
+          </button>
+        </div>
+        <p id="npmrcHint" class="npmrc-hint hidden" aria-live="polite"></p>
+      </section>
+
+      <footer>
+        <p class="note">The token is created and displayed automatically.</p>
+      </footer>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
