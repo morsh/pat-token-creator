@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ADO PAT Token Creator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automate PAT token creation on Azure DevOps with all required permissions pre-selected.",
   "permissions": [
     "activeTab",
@@ -35,7 +35,9 @@
         "https://*.visualstudio.com/_usersSettings/tokens*",
         "https://dev.azure.com/_usersSettings/tokens*"
       ],
-      "js": ["content.js"],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ]
