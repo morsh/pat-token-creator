@@ -2,6 +2,10 @@
 
 A developer-convenience Chrome extension that automates creating a Personal Access Token on Azure DevOps with all required permissions pre-selected. It fills and submits the form for you, then displays the token directly in the popup so you can copy it in one click.
 
+<p align="center">
+  <img src="docs/screenshot.png" alt="Extension popup showing token creation and copy buttons" width="380" />
+</p>
+
 ---
 
 ## Permissions granted (all boxes checked)
@@ -12,7 +16,15 @@ Build · Code · Deployment Groups · Entitlements · Environment · Extensions 
 
 ## Installation
 
-### Option A — Load the latest release (recommended)
+### Option A — Load from source
+
+1. Clone or download this repository.
+2. Open Chrome and navigate to `chrome://extensions`.
+3. Enable **Developer mode** (toggle in the top-right corner).
+4. Click **"Load unpacked"** and select the `pat-token-creator` folder.
+5. The extension icon appears in your toolbar.
+
+### Option B — Load the latest release (recommended)
 
 1. Go to the [Releases page](https://github.com/morsh/pat-token-creator/releases) and download the latest `ado-pat-token-creator-vX.Y.Z.zip`.
 2. Unzip it to a permanent folder on your machine (e.g. `~/tools/pat-token-creator`).
@@ -20,14 +32,6 @@ Build · Code · Deployment Groups · Entitlements · Environment · Extensions 
 4. Enable **Developer mode** (toggle in the top-right corner).
 5. Click **"Load unpacked"** and select the unzipped folder.
 6. The extension icon appears in your toolbar.
-
-### Option B — Load from source
-
-1. Clone or download this repository.
-2. Open Chrome and navigate to `chrome://extensions`.
-3. Enable **Developer mode** (toggle in the top-right corner).
-4. Click **"Load unpacked"** and select the `pat-token-creator` folder.
-5. The extension icon appears in your toolbar.
 
 ---
 
